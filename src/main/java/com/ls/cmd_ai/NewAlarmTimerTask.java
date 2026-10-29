@@ -485,7 +485,7 @@ public class NewAlarmTimerTask extends TimerTask {
 						}
 
 						if (table.getJoinTable().indexOf("multiGasResultAlarmData") > -1) {
-							totalAlarmListsql += "L.event_id,";
+							// totalAlarmListsql += "L.event_id,";
 						}
 
 						totalAlarmListsql = totalAlarmListsql.substring(0, totalAlarmListsql.length() - 1); // 쉼표 제거
@@ -504,7 +504,7 @@ public class NewAlarmTimerTask extends TimerTask {
 						}
 
 						if (table.getJoinTable().indexOf("multiGasResultAlarmData") > -1) {
-							totalAlarmListsql += "L.event_id,";
+							// totalAlarmListsql += "L.event_id,";
 						}
 
 						totalAlarmListsql = totalAlarmListsql.substring(0, totalAlarmListsql.length() - 1); // 쉼표 제거
@@ -527,7 +527,7 @@ public class NewAlarmTimerTask extends TimerTask {
 						}
 
 						if (table.getJoinTable().indexOf("multiGasResultAlarmData") > -1) {
-							totalAlarmListsql += "L.event_type_id,";
+							// totalAlarmListsql += "L.event_type_id,";
 						}
 
 						totalAlarmListsql = totalAlarmListsql.substring(0, totalAlarmListsql.length() - 1); // 쉼표 제거
@@ -548,7 +548,7 @@ public class NewAlarmTimerTask extends TimerTask {
 						}
 
 						if (table.getJoinTable().indexOf("multiGasResultAlarmData") > -1) {
-							totalAlarmListsql += "L.event_type_name,";
+							// totalAlarmListsql += "L.event_type_name,";
 						}
 
 						totalAlarmListsql = totalAlarmListsql.substring(0, totalAlarmListsql.length() - 1); // 쉼표 제거
@@ -610,11 +610,10 @@ public class NewAlarmTimerTask extends TimerTask {
 					}
 
 					if (table.getJoinTable().indexOf("multiGasResultAlarmData") > -1) {
-						totalAlarmListsql += "LEFT JOIN (SELECT resultAlarm.*, eventHistory.event_type_id, eventType.event_type_name FROM dau_data_dist.tb_multi_gas_result_alarm_data_"
-								+ table.getDate() + " resultAlarm " +
-								"LEFT JOIN dau_data_dist.tb_event_history_" + table.getDate()
-								+ " eventHistory ON resultAlarm.event_id = eventHistory.event_id " +
-								"LEFT JOIN dau_info_h_mv.tb_event_type eventType ON eventHistory.event_type_id = eventType.event_type_id ) AS L ON A.alarm_id = L.alarm_id ";
+
+						totalAlarmListsql += "LEFT JOIN (SELECT * FROM dau_data_dist.tb_multi_gas_result_alarm_data_"
+								+ table.getDate() + ") AS L ON A.alarm_id = L.alarm_id ";
+
 					}
 
 					totalAlarmListsql += " WHERE B.matched = 1 " +
